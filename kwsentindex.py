@@ -10,7 +10,6 @@ import sqlalchemy
 # GitHub 저장소에 업로드된 폰트 파일 경로 설정
 font_path = os.path.join(os.path.dirname(__file__), 'NanumGothic.ttf')
 # font_path = "C:/Windows/Fonts/NanumGothic.ttf"
-# font_path = "NanumGothic.ttf"
 fontprop = fm.FontProperties(fname=font_path, size=10)
 plt.rcParams['font.family'] = fontprop.get_name()
 
@@ -86,10 +85,10 @@ plt.plot(sentiment_trend1['year_month'], sentiment_trend1['index'], marker='o', 
 plt.plot(sentiment_trend1['year_month'], sentiment_trend1['6개월 이동평균'], color='blue', linestyle='-', linewidth=2,
          label='6개월 이동평균')
 plt.axhline(y=0.5, color='r', linestyle='--')
-plt.xlabel('연월', fontproperties = fontprop)
-plt.ylabel('감성지수', fontproperties = fontprop)
-plt.title(f"감성지수: '{keyword}'", fontproperties = fontprop)
-plt.legend(prop = fontprop)
+plt.xlabel('연월', fontproperties=fontprop)
+plt.ylabel('감성지수', fontproperties=fontprop)
+plt.title(f"감성지수: '{keyword}'", fontproperties=fontprop)
+plt.legend(prop=fontprop)
 plt.grid(True)
 
 # Streamlit에 그래프 표시
