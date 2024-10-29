@@ -84,7 +84,7 @@ sentiment_trend1['6개월 이동평균'] = sentiment_trend1['index'].rolling(win
 fig = plt.figure(figsize=(12, 6))
 plt.plot(sentiment_trend1['year_month'], sentiment_trend1['index'], marker='o', color='g', label='감성지수')
 plt.plot(sentiment_trend1['year_month'], sentiment_trend1['6개월 이동평균'], color='blue', linestyle='-', linewidth=2,
-         label='6개월 이동평균')
+         label='6개월 이동평균', fontproperties = fontprop)
 plt.axhline(y=0.5, color='r', linestyle='--')
 plt.xlabel('연월', fontproperties = fontprop)
 plt.ylabel('감성지수', fontproperties = fontprop)
