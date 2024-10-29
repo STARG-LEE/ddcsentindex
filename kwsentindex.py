@@ -74,6 +74,8 @@ sentiment_trend.loc[(sentiment_trend['1'] > 0) & (sentiment_trend['-1'] > 0), 'i
 # 결측값 채우기
 sentiment_trend['index'] = sentiment_trend['index'].fillna(method='ffill').fillna(method='bfill')
 
+sentiment_trend['total'] = sentiment_trend['1'] + sentiment_trend['-1']
+
 # 6개월 이동평균 계산
 sentiment_trend1 = sentiment_trend.reset_index()
 sentiment_trend1['year_month'] = sentiment_trend1['year_month'].dt.to_timestamp()
@@ -85,11 +87,22 @@ plt.plot(sentiment_trend1['year_month'], sentiment_trend1['index'], marker='o', 
 plt.plot(sentiment_trend1['year_month'], sentiment_trend1['6개월 이동평균'], color='blue', linestyle='-', linewidth=2,
          label='6개월 이동평균')
 plt.axhline(y=0.5, color='r', linestyle='--')
-plt.xlabel('연월', fontproperties=fontprop)
-plt.ylabel('감성지수', fontproperties=fontprop)
-plt.title(f"감성지수: '{keyword}'", fontproperties=fontprop)
-plt.legend(prop=fontprop)
-plt.grid(True)
+
+ax1 = plt.gca()
+ax2 = ax1.twinx()
+ax2.bar(sentiment_trend1['year_month'], sentiment_trend1['total'], color='red', alpha=1, label='Total')
+
+# Setting labels and title
+ax1.set_xlabel('Year-Month')
+ax1.set_ylabel('감성지수 and 6개월 이동평균', fontproperties=fontprop)
+ax2.set_ylabel('총 기사 수', fontproperties=fontprop)
+plt.title("감성지수와 기사 수", fontproperties=fontprop)
+
+# Adding legends for both y-axes
+ax1.legend(loc='upper left', prop=fontprop)
+
+# Display grid for the primary axis
+ax1.grid(True)
 
 # Streamlit에 그래프 표시
 st.pyplot(fig)
